@@ -37,7 +37,7 @@ FSJS project 2 - List Filter and Pagination
 ***/
 
 function showPage(){
-  
+
 }
 
 
@@ -46,7 +46,10 @@ function showPage(){
    functionality to the pagination buttons.
 ***/
 
+function appendPageLinks(){
 
+
+}
 
 
 
