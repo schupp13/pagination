@@ -41,21 +41,15 @@ console.log(number_for_last_page);
 ***/
 
 function showPage(page, all_students){
-  max_index = (page * 10) - 1;
-  lowest_index = (max_index - 9);
-  const new_div = document.createElement('div');
-  const new_ul = document.createElement('ul');
-  new_div.appendChild(new_ul);
+  const max_index = (page * 10) - 1;
+  const lowest_index = (max_index - 9);
   for(let i = 0; i < all_students.length; i++){
-    const li = document.createElement('li');
     if (i >= lowest_index && i <= max_index ){
-      li = all_students[i].style.display = '';
+       all_students[i].style.display = '';
     }else{
-      li = all_students[i].style.display = 'none';
+       all_students[i].style.display = 'none';
     }
-    new_ul.appendChild(li);
   }
-
 }
 
 showPage(1, list_of_students);
