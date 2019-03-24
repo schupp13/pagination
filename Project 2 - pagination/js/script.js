@@ -40,32 +40,40 @@ console.log(number_for_last_page);
        "invoke" the function
 ***/
 
-function showPage(page, all_students){
+function showPage(page, list){
   const max_index = (page * 10) - 1;
   const lowest_index = (max_index - 9);
-  for(let i = 0; i < all_students.length; i++){
+  for(let i = 0; i < list.length; i++){
     if (i >= lowest_index && i <= max_index ){
-       all_students[i].style.display = '';
+       list[i].style.display = '';
     }else{
-       all_students[i].style.display = 'none';
+       list[i].style.display = 'none';
     }
   }
 }
 
 showPage(1, list_of_students);
 
-
-
-
 /***
    Create the `appendPageLinks function` to generate, append, and add
    functionality to the pagination buttons.
 ***/
 
-function appendPageLinks(){
-
-  for(let i = 0; i < number_of_pages.length; i++){
-
+function appendPageLinks(list){
+  const pages = Math.ceil(list.length/10);
+  const newDiv = document.createElement('div');
+  const div = document.getElementsByClassName('page');
+  newDiv.className = 'pagination';
+  div.appendChild(newDiv);
+  const ul = document.createElement('ul');
+  newDiv.appendChild(ul);
+  for(let i = 0; i <= page; i++){
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    const li.textContent = i+1;
+  }
+  a.addEventListener(){
+    
   }
 
 }
