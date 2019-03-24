@@ -22,8 +22,6 @@ const list_of_students = document.getElementsByClassName('student-item');
 const number_of_pages = Math.ceil(list_of_students.length/10);
 const number_for_last_page = list_of_students.length % 10;
 
-console.log(number_for_last_page);
-
 /***
    Create the `showPage` function to hide all of the items in the
    list except for the ten you want to show.
@@ -40,7 +38,7 @@ console.log(number_for_last_page);
        "invoke" the function
 ***/
 
-function showPage(page, list){
+ const showPage = (page, list) => {
   const max_index = (page * 10) - 1;
   const lowest_index = (max_index - 9);
   for(let i = 0; i < list.length; i++){
@@ -52,31 +50,35 @@ function showPage(page, list){
   }
 }
 
-showPage(1, list_of_students);
-
 /***
    Create the `appendPageLinks function` to generate, append, and add
    functionality to the pagination buttons.
 ***/
 
-function appendPageLinks(list){
+const appendPageLinks = (list) => {
   const pages = Math.ceil(list.length/10);
   const newDiv = document.createElement('div');
-  const div = document.getElementsByClassName('page');
+  const div = document.querySelector('.page');
   newDiv.className = 'pagination';
   div.appendChild(newDiv);
   const ul = document.createElement('ul');
   newDiv.appendChild(ul);
-  for(let i = 0; i <= page; i++){
+  for(let i = 0; i < pages; i++){
     const li = document.createElement('li');
     const a = document.createElement('a');
-    const li.textContent = i+1;
-  }
-  a.addEventListener(){
-    
+    const page = i + 1;
+    a.textContent = page;
+    a.href = '#';
+    li.appendChild(a);
+    ul.appendChild(li);
+    a.addEventListener('click', (e) => {
+      showPage(e.target.textContent, list);
+    });
   }
 
 }
+appendPageLinks(list_of_students);
+
 
 
 
