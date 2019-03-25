@@ -19,8 +19,6 @@ FSJS project 2 - List Filter and Pagination
 //const basic_div = document.querySelector
 //console.log(main_div);
 const list_of_students = document.getElementsByClassName('student-item');
-const number_of_pages = Math.ceil(list_of_students.length/10);
-const number_for_last_page = list_of_students.length % 10;
 
 /***
    Create the `showPage` function to hide all of the items in the
@@ -73,11 +71,33 @@ const appendPageLinks = (list) => {
     ul.appendChild(li);
     a.addEventListener('click', (e) => {
       showPage(e.target.textContent, list);
+      const paginationLinks = document.querySelectorAll('.pagination a');
+      for(let i = 0; i < paginationLinks.length; i++){
+        paginationLinks[i].classList.remove('active');
+        e.target.className = 'active';
+      }
     });
+    showPage(1, list)// shows the first page when the page loads
+    const firstA = document.querySelector('.pagination a');
+    firstA.className = 'active';
   }
 
 }
+
+const searchFunction = (list) => {
+  const inputDiv = document.createElement('div');
+  inputDiv.className = 'student-search';
+  const parentDiv = document.querySelector('.page-header');
+  console.log(parentDiv);
+  parentDiv.appendChild(inputDiv);
+  const input = document.createElement('input');
+  input['placeholder'] = "Search for students...";
+  inputDiv.appendChild(input);
+
+}
+
 appendPageLinks(list_of_students);
+searchFunction(list_of_students);
 
 
 
