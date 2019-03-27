@@ -88,14 +88,32 @@ const searchFunction = (list) => {
   const inputDiv = document.createElement('div');
   inputDiv.className = 'student-search';
   const parentDiv = document.querySelector('.page-header');
-  console.log(parentDiv);
   parentDiv.appendChild(inputDiv);
   const input = document.createElement('input');
   input['placeholder'] = "Search for students...";
+  input.className = "inputSearch";
+  const searchButton = document.createElement('button');
+  searchButton.textContent = 'Search';
   inputDiv.appendChild(input);
+  inputDiv.appendChild(searchButton);
+  const inputSearch = document.querySelector('.inputSearch');
+  const studentNames = document.querySelectorAll('.student-details h3');
+  const studentEmails = document.querySelectorAll('.student-details span');
+  console.log(studentNames[1].textContent);
+  console.log(studentEmails[1].textContent);
 
+  inputSearch.addEventListener('keyup', (e) => {
+    console.log(e.target.value);
+    console.log(inputSearch.value)
+    for(let i = 0; i < studentNames.length; i++){
+    if(inputSearch.value != studentNames[i].textContent || inputSearch.value != studentEmails[i].textContent){
+      list[i].style.display = '';
+    }else{
+      list[i].style.display = 'none';
+    }
+  }
+   });
 }
-
 appendPageLinks(list_of_students);
 searchFunction(list_of_students);
 
