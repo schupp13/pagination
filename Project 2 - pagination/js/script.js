@@ -105,8 +105,7 @@ const searchFunction = (list) => {
   const inputSearch = document.querySelector('.inputSearch');
   const studentNames = document.querySelectorAll('.student-details h3');
   const studentEmails = document.querySelectorAll('.student-details span');
-  console.log(studentNames[1].textContent);
-  console.log(studentEmails[1].textContent);
+
 
   inputSearch.addEventListener('keyup', (e) => {
     const newList = [];
