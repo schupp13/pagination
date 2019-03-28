@@ -54,6 +54,11 @@ const list_of_students = document.getElementsByClassName('student-item');
 ***/
 
 const appendPageLinks = (list) => {
+  test = document.querySelector('.pagination');
+  if(test){
+    test.parentNode.removeChild(test);
+  }
+
   const pages = Math.ceil(list.length/10);
   const newDiv = document.createElement('div');
   const div = document.querySelector('.page');
@@ -69,6 +74,7 @@ const appendPageLinks = (list) => {
     a.href = '#';
     li.appendChild(a);
     ul.appendChild(li);
+
     a.addEventListener('click', (e) => {
       showPage(e.target.textContent, list);
       const paginationLinks = document.querySelectorAll('.pagination a');
@@ -103,15 +109,16 @@ const searchFunction = (list) => {
   console.log(studentEmails[1].textContent);
 
   inputSearch.addEventListener('keyup', (e) => {
-    console.log(e.target.value);
-    console.log(inputSearch.value)
-    for(let i = 0; i < studentNames.length; i++){
-    if(inputSearch.value != studentNames[i].textContent || inputSearch.value != studentEmails[i].textContent){
-      list[i].style.display = '';
-    }else{
-      list[i].style.display = 'none';
+    const newList = [];
+    for(let i = 0; i < list.length; i++){
+      const name = studentNames[i].textContent;
+      const email = studentEmails[i].textContent;
+      if(name.indexOf(inputSearch.value)!= -1 || email.indexOf(inputSearch.value) != -1){
+        newList.push(list[i]);
+      }
     }
-  }
+     console.log(newList);
+    appendPageLinks(newList);
    });
 }
 appendPageLinks(list_of_students);
