@@ -100,24 +100,24 @@ const searchFunction = (list) => {
   input.className = "inputSearch";
   const searchButton = document.createElement('button');
   searchButton.textContent = 'Search';
+  searchButton.className = 'searchButton'
   inputDiv.appendChild(input);
   inputDiv.appendChild(searchButton);
   const inputSearch = document.querySelector('.inputSearch');
   const studentNames = document.querySelectorAll('.student-details h3');
-  const studentEmails = document.querySelectorAll('.student-details span');
 
 
   inputSearch.addEventListener('keyup', (e) => {
     const newList = [];
     for(let i = 0; i < list.length; i++){
       const name = studentNames[i].textContent;
-      const email = studentEmails[i].textContent;
-      if(name.indexOf(inputSearch.value)!= -1 || email.indexOf(inputSearch.value) != -1){
+      if(name.indexOf(inputSearch.value)!= -1){
         newList.push(list[i]);
       }
     }
-     console.log(newList);
     appendPageLinks(newList);
+
+     console.log(newList);
    });
 }
 appendPageLinks(list_of_students);
