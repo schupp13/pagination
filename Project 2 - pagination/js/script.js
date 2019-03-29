@@ -103,26 +103,22 @@ const searchFunction = (list) => {
   inputDiv.appendChild(searchButton);
   const inputSearch = document.querySelector('.inputSearch');
   const studentNames = document.querySelectorAll('.student-details h3');
+  const searchSubmit = document.querySelector('.searchButton');
 
-
+  // EventLisner for the search input - real time search as the user types in the input field
   inputSearch.addEventListener('keyup', (e) => {
     const newList = [];
     for(let i = 0; i < list.length; i++){
-      const name = studentNames[i].textContent;
+      const name = studentNames[i].textContent.toUpperCase();
       list[i].style.display = 'none';
-      if(name.indexOf(inputSearch.value)!= -1){
+      if(name.indexOf(inputSearch.value.toUpperCase())!= -1){
         newList.push(list[i]);
       }
     }
     appendPageLinks(newList);
-
-     console.log(newList);
    });
+
 }
 appendPageLinks(list_of_students);
 searchFunction(list_of_students);
-
-
-
-
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
