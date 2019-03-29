@@ -9,7 +9,6 @@ FSJS project 2 - List Filter and Pagination
 /***
    Add your global variables that store the DOM elements you will
    need to reference and/or manipulate.
-
    But be mindful of which variables should be global and which
    should be locally scoped to one of the two main functions you're
    going to create. A good general rule of thumb is if the variable
@@ -23,8 +22,6 @@ const list_of_students = document.getElementsByClassName('student-item');
 /***
    Create the `showPage` function to hide all of the items in the
    list except for the ten you want to show.
-
-
    Pro Tips:
      - Keep in mind that with a list of 54 students, the last page
        will only display four.
@@ -83,10 +80,11 @@ const appendPageLinks = (list) => {
         e.target.className = 'active';
       }
     });
-    showPage(1, list)// shows the first page when the page loads
-    const firstA = document.querySelector('.pagination a');
-    firstA.className = 'active';
+
   }
+  showPage(1, list)// shows the first page when the page loads
+  const firstA = document.querySelector('.pagination a');
+  firstA.className = 'active';
 
 }
 
@@ -111,6 +109,7 @@ const searchFunction = (list) => {
     const newList = [];
     for(let i = 0; i < list.length; i++){
       const name = studentNames[i].textContent;
+      list[i].style.display = 'none';
       if(name.indexOf(inputSearch.value)!= -1){
         newList.push(list[i]);
       }
