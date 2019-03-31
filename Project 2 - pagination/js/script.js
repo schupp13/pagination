@@ -118,6 +118,17 @@ const searchFunction = (list) => {
     appendPageLinks(newList);
    });
 
+   searchSubmit.addEventListener('click', (e) => {
+     const newList = [];
+     for(let i = 0; i < list.length; i++){
+       const name = studentNames[i].textContent.toUpperCase();
+       list[i].style.display = 'none';
+       if(name.indexOf(inputSearch.value.toUpperCase())!= -1){
+         newList.push(list[i]);
+       }
+     }
+     appendPageLinks(newList);
+   });
 }
 appendPageLinks(list_of_students);
 searchFunction(list_of_students);
