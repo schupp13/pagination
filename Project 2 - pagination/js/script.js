@@ -2,35 +2,15 @@
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
-
-// Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
-
-
-/***
-   Add your global variables that store the DOM elements you will
-   need to reference and/or manipulate.
-   But be mindful of which variables should be global and which
-   should be locally scoped to one of the two main functions you're
-   going to create. A good general rule of thumb is if the variable
-   will only be used inside of a function, then it can be locally
-   scoped to that function.
-***/
-//const basic_div = document.querySelector
-//console.log(main_div);
+/*
+  Global Variables
+*/
 const list_of_students = document.getElementsByClassName('student-item');
 
 /***
-   Create the `showPage` function to hide all of the items in the
+   showPage` function hides all of the items in the
    list except for the ten you want to show.
-   Pro Tips:
-     - Keep in mind that with a list of 54 students, the last page
-       will only display four.
-     - Remember that the first student has an index of 0.
-     - Remember that a function `parameter` goes in the parens when
-       you initially define the function, and it acts as a variable
-       or a placeholder to represent the actual function `argument`
-       that will be passed into the parens later when you call or
-       "invoke" the function
+
 ***/
 
  const showPage = (page, list) => {
@@ -46,11 +26,13 @@ const list_of_students = document.getElementsByClassName('student-item');
 }
 
 /***
-   Create the `appendPageLinks function` to generate, append, and add
+   appendPageLinks generate, append, and add
    functionality to the pagination buttons.
 ***/
 
 const appendPageLinks = (list) => {
+
+  //this if statement deletes all page links (if there is any) before creating new ones
   test = document.querySelector('.pagination');
   if(test){
     test.parentNode.removeChild(test);
@@ -72,6 +54,13 @@ const appendPageLinks = (list) => {
     li.appendChild(a);
     ul.appendChild(li);
 
+    /*
+      EventLisner for the pagination links,
+       - calls the showpage function with
+       - loops through and removes alll active classes from the links,
+       then assigns one to the properly selected link
+
+    */
     a.addEventListener('click', (e) => {
       showPage(e.target.textContent, list);
       const paginationLinks = document.querySelectorAll('.pagination a');
@@ -84,10 +73,15 @@ const appendPageLinks = (list) => {
   }
   showPage(1, list)// shows the first page when the page loads
   const firstA = document.querySelector('.pagination a');
-  firstA.className = 'active';
+  firstA.className = 'active';//making sure the first page is active on pageload
 
 }
 
+/*
+SearchFuntion : builds input field and the submit button.
+- contains two Eventlistners
+
+*/
 const searchFunction = (list) => {
   const inputDiv = document.createElement('div');
   inputDiv.className = 'student-search';
@@ -108,6 +102,12 @@ const searchFunction = (list) => {
   // EventLisner for the search input - real time search as the user types in the input field
   inputSearch.addEventListener('keyup', (e) => {
     const newList = [];
+    const searchFail = document.querySelector('.searchFail');
+    //testing to see if the 'fail search' display is showing
+    if(searchFail){
+      searchFail.parentNode.removeChild(searchFail);
+    }
+
     for(let i = 0; i < list.length; i++){
       const name = studentNames[i].textContent.toUpperCase();
       list[i].style.display = 'none';
@@ -115,10 +115,18 @@ const searchFunction = (list) => {
         newList.push(list[i]);
       }
     }
+
+    if(newList.length === 0){
+       displaySearchFail(inputSearch.value);
+     }
     appendPageLinks(newList);
    });
 
+   // EventLisner for the submit button,
    searchSubmit.addEventListener('click', (e) => {
+     const searchFail = document.querySelector('.searchFail');
+     searchFail.parentNode.removeChild(searchFail);
+
      const newList = [];
      for(let i = 0; i < list.length; i++){
        const name = studentNames[i].textContent.toUpperCase();
@@ -126,10 +134,36 @@ const searchFunction = (list) => {
        if(name.indexOf(inputSearch.value.toUpperCase())!= -1){
          newList.push(list[i]);
        }
+
      }
-     appendPageLinks(newList);
+
+     if(newList.length === 0){
+        displaySearchFail(inputSearch.value);
+      }
+   appendPageLinks(newList);
    });
 }
+
+/* funtion that creates and displays a h2 search error message ("Sorry, but "${badResult}" is not a student in the system.")*/
+const displaySearchFail = (badResult) =>{
+  const test = document.querySelector(`.searchFail`);
+  if(test){
+    test.parentNode.removeChild(test);
+  }
+  const searchFail = document.createElement('h2');
+  searchFail.innerHTML =  `<br>Sorry, but "${badResult}" is not a student in the system.`;
+  searchFail['style'] = `font-size: 30px; color: tomato; text-align: right; `;
+  searchFail.className = `searchFail`;
+  const studentHeader = document.querySelector(`h2`);
+  console.log(studentHeader);
+  studentHeader.parentNode.insertBefore(searchFail, studentHeader.nextSibling);
+}
+
+
+
+/*call the appendpagelinks function to properly display site: the appendpageLinks
+ calls the show page function to display the page one correctly(line 74)
+*/
 appendPageLinks(list_of_students);
+
 searchFunction(list_of_students);
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
