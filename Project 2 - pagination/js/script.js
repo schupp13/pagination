@@ -103,7 +103,7 @@ const searchFunction = (list) => {
   inputSearch.addEventListener('keyup', (e) => {
     const newList = [];
     const searchFail = document.querySelector('.searchFail');
-    //testing to see if the 'fail search' display is showing
+    //testing to see if the 'fail search' display is showing, if so it will be deleted
     if(searchFail){
       searchFail.parentNode.removeChild(searchFail);
     }
@@ -124,8 +124,11 @@ const searchFunction = (list) => {
 
    // EventLisner for the submit button,
    searchSubmit.addEventListener('click', (e) => {
+     //testing to see if the 'fail search' display is showing, if so it will be deleted
      const searchFail = document.querySelector('.searchFail');
+     if(searchFail){
      searchFail.parentNode.removeChild(searchFail);
+   }
 
      const newList = [];
      for(let i = 0; i < list.length; i++){
