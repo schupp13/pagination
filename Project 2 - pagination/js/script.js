@@ -137,7 +137,7 @@ const searchFunction = (list) => {
        if(name.indexOf(inputSearch.value.toUpperCase())!= -1){
          newList.push(list[i]);
        }
-
+       
      }
 
      if(newList.length === 0){
